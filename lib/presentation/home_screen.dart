@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fluttergraphs/presentation/bar_chart/bar_chat_page.dart';
+import 'package:fluttergraphs/presentation/chart/bar/bar_chart_page.dart';
+import 'package:fluttergraphs/presentation/chart/line/line_chart_page.dart';
+import 'package:fluttergraphs/presentation/chart/pie/pie_chart_page.dart';
 import 'package:fluttergraphs/presentation/common/bottom_navigation/adaptative_scaffold.dart';
 import 'package:fluttergraphs/presentation/common/bottom_navigation/bottom_navigation_tab.dart';
 
@@ -25,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Line Chart'),
       ),
       key: GlobalKey<NavigatorState>(),
-      initialPageBuilder: (_) => BarChartPage(),
+      initialPageBuilder: (_) => LineChartPage(),
     ),
     BottomNavigationTab(
       item: BottomNavigationBarItem(
@@ -33,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Pie Chart'),
       ),
       key: GlobalKey<NavigatorState>(),
-      initialPageBuilder: (_) => BarChartPage(),
+      initialPageBuilder: (_) => PieChartPage(),
     ),
   ];
 

@@ -8,6 +8,7 @@ class BarChartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Bar Chart'),
       ),
+      body: Text('Teste'),
     );
   }
 }

@@ -7,8 +7,7 @@ class MaterialScaffold extends StatefulWidget {
     @required this.tabList,
     @required this.onItemSelected,
     @required this.selectedIndex,
-  })
-      : assert(tabList != null),
+  })  : assert(tabList != null),
         assert(onItemSelected != null),
         assert(selectedIndex != null);
 
@@ -37,22 +36,24 @@ class _MaterialScaffoldState extends State<MaterialScaffold> {
   Widget _buildPageFlow(BuildContext context, BottomNavigationTab tab) =>
       Navigator(
         key: tab.key,
-        onGenerateRoute: (settings) =>
-            MaterialPageRoute(
-              settings: settings, builder: tab.initialPageBuilder,),
+        onGenerateRoute: (settings) => MaterialPageRoute(
+          settings: settings,
+          builder: tab.initialPageBuilder,
+        ),
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        children: widget.tabList.map(
-                (tab) => _buildPageFlow(context, tab)
-        ).toList(),
+        index: widget.selectedIndex,
+        children:
+            widget.tabList.map((tab) => _buildPageFlow(context, tab)).toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.selectedIndex,
         items: widget.tabList.map((tab) => tab.item).toList(),
+        onTap: (index) => widget.onItemSelected(index),
       ),
     );
   }

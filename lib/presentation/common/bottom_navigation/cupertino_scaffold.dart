@@ -33,7 +33,8 @@ class CupertinoScaffold extends StatelessWidget {
           initialIndex: selectedIndex,
         ),
         tabBar: CupertinoTabBar(
-          items: tabList.map((tab) => tab.item),
+          items: tabList.map((tab) => tab.item).toList(),
+          onTap: (index) => onItemSelected(index),
         ),
         tabBuilder: (context, index) => _buildPageFlow(context, tabList[index]),
       );
