@@ -1,7 +1,6 @@
-import 'package:fluttergraphs/data/repository/population_repository.dart';
-
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:domain/use_case/get_population_data_uc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:fluttergraphs/presentation/chart/bar/bar_chart_models.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -9,15 +8,15 @@ import 'bar_chart_models.dart';
 import 'chart_bar_mappers.dart';
 
 class BarChartBloc {
-  BarChartBloc() {
+  BarChartBloc({
+    @required this.populationDataUC,
+  }) : assert(populationDataUC != null) {
     _subscriptions.add(
       _fetchPopulationData().listen(_onNewStateSubject.add),
     );
   }
 
-  final populationDataUC = GetPopulationDataUC(
-    repository: PopulationRepository(),
-  );
+  final GetPopulationDataUC populationDataUC;
 
   final _subscriptions = CompositeSubscription();
 

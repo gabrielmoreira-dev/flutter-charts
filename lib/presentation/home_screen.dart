@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Bar Chart'),
       ),
       key: GlobalKey<NavigatorState>(),
-      initialPageBuilder: (_) => BarChartPage(),
+      initialPageBuilder: (context) => BarChartPage.create(context),
     ),
     BottomNavigationTab(
       item: BottomNavigationBarItem(
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Line Chart'),
       ),
       key: GlobalKey<NavigatorState>(),
-      initialPageBuilder: (_) => LineChartPage(),
+      initialPageBuilder: (context) => LineChartPage.create(context),
     ),
     BottomNavigationTab(
       item: BottomNavigationBarItem(

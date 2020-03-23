@@ -1,4 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/data/repository/sales_repository.dart';
 import 'package:fluttergraphs/presentation/chart/line/line_chart_models.dart';
 import 'package:rxdart/rxdart.dart';
@@ -7,15 +8,15 @@ import 'package:domain/use_case/get_sales_data_uc.dart';
 import 'line_chart_mappers.dart';
 
 class LineChartBloc {
-  LineChartBloc() {
+  LineChartBloc({
+    @required this.salesDataUC,
+  }) : assert(salesDataUC != null) {
     _subscriptions.add(
       _fetchSalesData().listen(_onNewStateSubject.add),
     );
   }
 
-  final salesDataUC = GetSalesDataUC(
-    repository: SalesRepository(),
-  );
+  final GetSalesDataUC salesDataUC;
 
   final _subscriptions = CompositeSubscription();
 
