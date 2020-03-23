@@ -29,15 +29,20 @@ class BarChartPage extends StatelessWidget {
                 Expanded(
                   child: StreamBuilder(
                     stream: bloc.onNewState,
-                    builder: (context, snapshot) => charts.BarChart(
-                      snapshot.data,
-                      animate: true,
-                      animationDuration: Duration(seconds: 5),
-                      /*domainAxis: charts.OrdinalAxisSpec(
-                        renderSpec:
-                            charts.SmallTickRendererSpec(),
-                      ),*/
-                    ),
+                    builder: (context, snapshot) => snapshot.data != null
+                        ? charts.BarChart(
+                            snapshot.data,
+                            animate: true,
+                            animationDuration: Duration(seconds: 5),
+                            domainAxis: charts.OrdinalAxisSpec(
+                              renderSpec: charts.SmallTickRendererSpec(
+                                labelRotation: 60,
+                              ),
+                            ),
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          ),
                   ),
                 )
               ],

@@ -29,11 +29,15 @@ class LineChartPage extends StatelessWidget {
                 Expanded(
                   child: StreamBuilder(
                     stream: bloc.onNewState,
-                    builder: (context, snapshot) => charts.LineChart(
-                      snapshot.data,
-                      animate: true,
-                      animationDuration: Duration(seconds: 5),
-                    ),
+                    builder: (context, snapshot) => snapshot.data != null
+                        ? charts.LineChart(
+                            snapshot.data,
+                            animate: true,
+                            animationDuration: Duration(seconds: 5),
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          ),
                   ),
                 )
               ],
