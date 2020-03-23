@@ -40,9 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return AdaptativeScaffold(
-      tabList: tabList,
-    );
-  }
+  Widget build(BuildContext context) => AdaptativeScaffold(
+        tabList: tabList,
+      );
 }

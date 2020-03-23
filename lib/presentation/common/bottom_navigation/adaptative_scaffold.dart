@@ -17,7 +17,7 @@ class AdaptativeScaffold extends StatefulWidget {
 }
 
 class _AdaptativeScaffoldState extends State<AdaptativeScaffold> {
-  var _selectedIndex = 0;
+  var _selectedIndex = 1;
 
   Widget _buildMaterial() => MaterialScaffold(
     selectedIndex: _selectedIndex,

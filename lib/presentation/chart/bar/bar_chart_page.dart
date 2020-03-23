@@ -33,7 +33,7 @@ class BarChartPage extends StatelessWidget {
                         ? charts.BarChart(
                             snapshot.data,
                             animate: true,
-                            animationDuration: Duration(seconds: 5),
+                            animationDuration: Duration(seconds: 3),
                             domainAxis: charts.OrdinalAxisSpec(
                               renderSpec: charts.SmallTickRendererSpec(
                                 labelRotation: 60,

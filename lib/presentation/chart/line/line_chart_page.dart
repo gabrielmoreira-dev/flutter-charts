@@ -33,7 +33,7 @@ class LineChartPage extends StatelessWidget {
                         ? charts.LineChart(
                             snapshot.data,
                             animate: true,
-                            animationDuration: Duration(seconds: 5),
+                            animationDuration: Duration(seconds: 3),
                           )
                         : Center(
                             child: CircularProgressIndicator(),
