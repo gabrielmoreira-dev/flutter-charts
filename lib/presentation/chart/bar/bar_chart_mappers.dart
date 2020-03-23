@@ -3,7 +3,7 @@ import 'package:domain/models/population_data.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttergraphs/presentation/chart/bar/bar_chart_models.dart';
 
-extension ChartBarMappers on PopulationData {
+extension BarChartMappers on PopulationData {
   PopulationDataVM toVM() => PopulationDataVM(
         year: year,
         population: population,

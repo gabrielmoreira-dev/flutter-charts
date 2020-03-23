@@ -1,6 +1,8 @@
+import 'package:domain/use_case/get_grades_data_uc.dart';
 import 'package:domain/use_case/get_population_data_uc.dart';
 import 'package:domain/use_case/get_sales_data_uc.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttergraphs/data/repository/grades_repository.dart';
 import 'package:fluttergraphs/data/repository/population_repository.dart';
 import 'package:fluttergraphs/data/repository/sales_repository.dart';
 import 'package:fluttergraphs/presentation/home_screen.dart';
@@ -28,6 +30,9 @@ class GraphsApp extends StatelessWidget {
     Provider(
       create: (_) => SalesRepository(),
     ),
+    Provider(
+      create: (_) => GradesRepository(),
+    ),
   ];
 
   final List<SingleChildWidget> _buildUCProviders = [
@@ -38,6 +43,11 @@ class GraphsApp extends StatelessWidget {
     ),
     ProxyProvider<SalesRepository, GetSalesDataUC>(
       update: (_, repository, __) => GetSalesDataUC(
+        repository: repository,
+      ),
+    ),
+    ProxyProvider<GradesRepository, GetGradesDataUC>(
+      update: (_, repository, __) => GetGradesDataUC(
         repository: repository,
       ),
     ),

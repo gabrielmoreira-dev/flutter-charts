@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Pie Chart'),
       ),
       key: GlobalKey<NavigatorState>(),
-      initialPageBuilder: (_) => PieChartPage(),
+      initialPageBuilder: (context) => PieChartPage.create(context),
     ),
   ];
 

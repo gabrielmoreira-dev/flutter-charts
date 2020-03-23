@@ -5,7 +5,7 @@ import 'package:fluttergraphs/presentation/chart/bar/bar_chart_models.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'bar_chart_models.dart';
-import 'chart_bar_mappers.dart';
+import 'bar_chart_mappers.dart';
 
 class BarChartBloc {
   BarChartBloc({
