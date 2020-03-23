@@ -20,7 +20,7 @@ class MaterialScaffold extends StatefulWidget {
 }
 
 class _MaterialScaffoldState extends State<MaterialScaffold> {
-/*  List<bool> _shouldBuildTab = [];
+  final _shouldBuildTab = <bool>[];
 
   @override
   void initState() {
@@ -31,24 +31,39 @@ class _MaterialScaffoldState extends State<MaterialScaffold> {
       ),
     );
     super.initState();
-  }*/
+  }
 
-  Widget _buildPageFlow(BuildContext context, BottomNavigationTab tab) =>
-      Navigator(
-        key: tab.key,
-        onGenerateRoute: (settings) => MaterialPageRoute(
-          settings: settings,
-          builder: tab.initialPageBuilder,
-        ),
-      );
+  Widget _buildPageFlow(
+      BuildContext context, int index, BottomNavigationTab tab) {
+    final isCurrentlySelected = index == widget.selectedIndex;
+
+    _shouldBuildTab[index] = isCurrentlySelected || _shouldBuildTab[index];
+
+    return _shouldBuildTab[index]
+        ? Navigator(
+            key: tab.key,
+            onGenerateRoute: (settings) => MaterialPageRoute(
+              settings: settings,
+              builder: tab.initialPageBuilder,
+            ),
+          )
+        : Container();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
         index: widget.selectedIndex,
-        children:
-            widget.tabList.map((tab) => _buildPageFlow(context, tab)).toList(),
+        children: widget.tabList
+            .map(
+              (tab) => _buildPageFlow(
+                context,
+                widget.tabList.indexOf(tab),
+                tab,
+              ),
+            )
+            .toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.selectedIndex,
