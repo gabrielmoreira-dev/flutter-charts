@@ -20,14 +20,13 @@ class BarChartBloc {
 
   final _subscriptions = CompositeSubscription();
 
-  final _onNewStateSubject =
-      BehaviorSubject<List<charts.Series<PopulationDataVM, String>>>();
+  final _onNewStateSubject = BehaviorSubject<BarChartState>();
 
-  Stream<List<charts.Series<PopulationDataVM, String>>> get onNewState =>
-      _onNewStateSubject;
+  Stream<BarChartState> get onNewState => _onNewStateSubject;
 
-  Stream<List<charts.Series<PopulationDataVM, String>>>
-      _fetchPopulationData() async* {
+  Stream<BarChartState> _fetchPopulationData() async* {
+    yield Loading();
+
     try {
       final populationDataList = await populationDataUC.getFuture();
       final dataVM = populationDataList.map((data) => data.toVM()).toList();
@@ -40,9 +39,11 @@ class BarChartBloc {
           colorFn: (PopulationDataVM series, _) => series.barColor,
         )
       ];
-      yield series;
+      yield Success(
+        series: series,
+      );
     } catch (e) {
-      yield <charts.Series<PopulationDataVM, String>>[];
+      yield Error();
     }
   }
 

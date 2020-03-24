@@ -3,7 +3,10 @@ import 'package:domain/use_case/get_grades_data_uc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/pie/pie_chart_bloc.dart';
+import 'package:fluttergraphs/presentation/common/response_view/response_view.dart';
 import 'package:provider/provider.dart';
+
+import 'pie_chart_models.dart';
 
 class PieChartPage extends StatelessWidget {
   PieChartPage({
@@ -23,6 +26,19 @@ class PieChartPage extends StatelessWidget {
           builder: (_, bloc, __) => PieChartPage(
             bloc: bloc,
           ),
+        ),
+      );
+
+  Widget _chartBuilder(List<charts.Series<GradesDataVM, String>> data) =>
+      charts.PieChart(
+        data,
+        animate: true,
+        animationDuration: Duration(seconds: 3),
+        defaultRenderer: charts.ArcRendererConfig(
+          arcWidth: 60,
+          arcRendererDecorators: [
+            charts.ArcLabelDecorator(),
+          ],
         ),
       );
 
@@ -49,21 +65,12 @@ class PieChartPage extends StatelessWidget {
                 Expanded(
                   child: StreamBuilder(
                     stream: bloc.onNewState,
-                    builder: (context, snapshot) => snapshot.data != null
-                        ? charts.PieChart(
-                            snapshot.data,
-                            animate: true,
-                            animationDuration: Duration(seconds: 3),
-                            defaultRenderer: charts.ArcRendererConfig(
-                              arcWidth: 60,
-                              arcRendererDecorators: [
-                                charts.ArcLabelDecorator(),
-                              ],
-                            ),
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                    builder: (context, snapshot) =>
+                        ResponseView<Loading, Error, Success>(
+                      snapshot: snapshot,
+                      builder: (context, success) =>
+                          _chartBuilder(success.series),
+                    ),
                   ),
                 )
               ],

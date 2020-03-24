@@ -3,6 +3,8 @@ import 'package:domain/use_case/get_sales_data_uc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/line/line_chart_bloc.dart';
+import 'package:fluttergraphs/presentation/chart/line/line_chart_models.dart';
+import 'package:fluttergraphs/presentation/common/response_view/response_view.dart';
 import 'package:provider/provider.dart';
 
 class LineChartPage extends StatelessWidget {
@@ -24,6 +26,13 @@ class LineChartPage extends StatelessWidget {
             bloc: bloc,
           ),
         ),
+      );
+
+  Widget _chartBuilder(List<charts.Series<SalesDataVM, int>> data) =>
+      charts.LineChart(
+        data,
+        animate: true,
+        animationDuration: Duration(seconds: 3),
       );
 
   @override
@@ -48,17 +57,13 @@ class LineChartPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: StreamBuilder(
-                    stream: bloc.onNewState,
-                    builder: (context, snapshot) => snapshot.data != null
-                        ? charts.LineChart(
-                            snapshot.data,
-                            animate: true,
-                            animationDuration: Duration(seconds: 3),
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                  ),
+                      stream: bloc.onNewState,
+                      builder: (context, snapshot) =>
+                          ResponseView<Loading, Error, Success>(
+                            snapshot: snapshot,
+                            builder: (context, success) =>
+                                _chartBuilder(success.series),
+                          )),
                 )
               ],
             ),

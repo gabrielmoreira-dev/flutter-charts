@@ -20,13 +20,13 @@ class LineChartBloc {
 
   final _subscriptions = CompositeSubscription();
 
-  final _onNewStateSubject =
-      BehaviorSubject<List<charts.Series<SalesDataVM, int>>>();
+  final _onNewStateSubject = BehaviorSubject<LineChartState>();
 
-  Stream<List<charts.Series<SalesDataVM, int>>> get onNewState =>
-      _onNewStateSubject;
+  Stream<LineChartState> get onNewState => _onNewStateSubject;
 
-  Stream<List<charts.Series<SalesDataVM, int>>> _fetchSalesData() async* {
+  Stream<LineChartState> _fetchSalesData() async* {
+    yield Loading();
+
     try {
       final salesDataList = await salesDataUC.getFuture();
       final dataVM = salesDataList.map((data) => data.toVM()).toList();
@@ -40,9 +40,11 @@ class LineChartBloc {
               charts.MaterialPalette.blue.shadeDefault,
         )
       ];
-      yield series;
+      yield Success(
+        series: series,
+      );
     } catch (e) {
-      yield <charts.Series<SalesDataVM, int>>[];
+      yield Error();
     }
   }
 

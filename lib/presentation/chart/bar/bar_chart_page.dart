@@ -3,7 +3,10 @@ import 'package:domain/use_case/get_population_data_uc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/bar/bar_chart_bloc.dart';
+import 'package:fluttergraphs/presentation/common/response_view/response_view.dart';
 import 'package:provider/provider.dart';
+
+import 'bar_chart_models.dart';
 
 class BarChartPage extends StatelessWidget {
   BarChartPage({
@@ -23,6 +26,18 @@ class BarChartPage extends StatelessWidget {
         child: Consumer<BarChartBloc>(
           builder: (_, bloc, __) => BarChartPage(
             bloc: bloc,
+          ),
+        ),
+      );
+
+  Widget _chartBuilder(List<charts.Series<PopulationDataVM, String>> data) =>
+      charts.BarChart(
+        data,
+        animate: true,
+        animationDuration: Duration(seconds: 3),
+        domainAxis: charts.OrdinalAxisSpec(
+          renderSpec: charts.SmallTickRendererSpec(
+            labelRotation: 60,
           ),
         ),
       );
@@ -50,20 +65,12 @@ class BarChartPage extends StatelessWidget {
                 Expanded(
                   child: StreamBuilder(
                     stream: bloc.onNewState,
-                    builder: (context, snapshot) => snapshot.data != null
-                        ? charts.BarChart(
-                            snapshot.data,
-                            animate: true,
-                            animationDuration: Duration(seconds: 3),
-                            domainAxis: charts.OrdinalAxisSpec(
-                              renderSpec: charts.SmallTickRendererSpec(
-                                labelRotation: 60,
-                              ),
-                            ),
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                    builder: (context, snapshot) =>
+                        ResponseView<Loading, Error, Success>(
+                      snapshot: snapshot,
+                      builder: (context, success) =>
+                          _chartBuilder(success.series),
+                    ),
                   ),
                 )
               ],
