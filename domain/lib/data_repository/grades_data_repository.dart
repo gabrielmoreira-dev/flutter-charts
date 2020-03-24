@@ -1,7 +1,7 @@
-import 'package:domain/models/grades_data.dart';
+import 'package:fluttergraphs/data/model/grades_data_cm.dart';
 
 abstract class GradesDataRepository {
 
-  Future<List<GradesData>> getGradesDataList();
+  Future<List<GradesDataCM>> getGradesDataList();
 
 }

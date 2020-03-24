@@ -1,32 +1,32 @@
 import 'package:domain/data_repository/grades_data_repository.dart';
-import 'package:domain/models/grades_data.dart';
+import 'package:fluttergraphs/data/model/grades_data_cm.dart';
 
 class GradesRepository extends GradesDataRepository {
   @override
-  Future<List<GradesData>> getGradesDataList() async => _gradesDataList;
+  Future<List<GradesDataCM>> getGradesDataList() async => _gradesDataList;
 
   final _gradesDataList = [
-    GradesData(
+    GradesDataCM(
       gradeSymbol: 'A',
       numberOfStudents: 190,
     ),
-    GradesData(
+    GradesDataCM(
       gradeSymbol: 'B',
       numberOfStudents: 230,
     ),
-    GradesData(
+    GradesDataCM(
       gradeSymbol: 'C',
       numberOfStudents: 150,
     ),
-    GradesData(
+    GradesDataCM(
       gradeSymbol: 'D',
       numberOfStudents: 73,
     ),
-    GradesData(
+    GradesDataCM(
       gradeSymbol: 'E',
       numberOfStudents: 31,
     ),
-    GradesData(
+    GradesDataCM(
       gradeSymbol: 'Fail',
       numberOfStudents: 13,
     ),
