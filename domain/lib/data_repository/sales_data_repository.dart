@@ -1,7 +1,7 @@
-import 'package:domain/models/sales_data.dart';
+import 'package:fluttergraphs/data/model/sales_data_cm.dart';
 
 abstract class SalesDataRepository {
 
-  Future<List<SalesData>> getSalesDataList();
+  Future<List<SalesDataCM>> getSalesDataList();
 
 }

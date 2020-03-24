@@ -19,13 +19,13 @@ class PieChartBloc {
 
   final _subscriptions = CompositeSubscription();
 
-  final _onNewStateSubject =
-      BehaviorSubject<List<charts.Series<GradesDataVM, String>>>();
+  final _onNewStateSubject = BehaviorSubject<PieChartState>();
 
-  Stream<List<charts.Series<GradesDataVM, String>>> get onNewState =>
-      _onNewStateSubject;
+  Stream<PieChartState> get onNewState => _onNewStateSubject;
 
-  Stream<List<charts.Series<GradesDataVM, String>>> _fetchGradesData() async* {
+  Stream<PieChartState> _fetchGradesData() async* {
+    yield Loading();
+
     try {
       final gradesDataList = await gradesDataUC.getFuture();
       final dataVM = gradesDataList.map((data) => data.toVM()).toList();
@@ -39,9 +39,11 @@ class PieChartBloc {
           measureFn: (GradesDataVM series, _) => series.numberOfStudents,
         )
       ];
-      yield series;
+      yield Success(
+        series: series,
+      );
     } catch (e) {
-      yield <charts.Series<GradesDataVM, String>>[];
+      yield Error();
     }
   }
 

@@ -3,7 +3,11 @@ import 'package:domain/use_case/get_population_data_uc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/bar/bar_chart_bloc.dart';
+import 'package:fluttergraphs/presentation/chart/chart_card.dart';
+import 'package:fluttergraphs/presentation/common/response_view/response_view.dart';
 import 'package:provider/provider.dart';
+
+import 'bar_chart_models.dart';
 
 class BarChartPage extends StatelessWidget {
   BarChartPage({
@@ -27,47 +31,30 @@ class BarChartPage extends StatelessWidget {
         ),
       );
 
+  Widget _chartBuilder(List<charts.Series<PopulationDataVM, String>> data) =>
+      charts.BarChart(
+        data,
+        animate: true,
+        animationDuration: Duration(seconds: 3),
+        domainAxis: charts.OrdinalAxisSpec(
+          renderSpec: charts.SmallTickRendererSpec(
+            labelRotation: 60,
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bar Chart'),
       ),
-      body: Center(
-        child: Container(
-          height: 400,
-          padding: EdgeInsets.all(20),
-          child: Card(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Population of U.S. over the years",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: StreamBuilder(
-                    stream: bloc.onNewState,
-                    builder: (context, snapshot) => snapshot.data != null
-                        ? charts.BarChart(
-                            snapshot.data,
-                            animate: true,
-                            animationDuration: Duration(seconds: 3),
-                            domainAxis: charts.OrdinalAxisSpec(
-                              renderSpec: charts.SmallTickRendererSpec(
-                                labelRotation: 60,
-                              ),
-                            ),
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                  ),
-                )
-              ],
-            ),
+      body: StreamBuilder(
+        stream: bloc.onNewState,
+        builder: (context, snapshot) => ResponseView<Loading, Error, Success>(
+          snapshot: snapshot,
+          builder: (context, success) => ChartCard(
+            chartBuilder: _chartBuilder(success.series),
           ),
         ),
       ),

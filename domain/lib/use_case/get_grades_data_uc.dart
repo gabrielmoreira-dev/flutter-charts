@@ -2,6 +2,7 @@ import 'package:domain/data_repository/grades_data_repository.dart';
 import 'package:domain/models/grades_data.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttergraphs/data/mapper/cache_to_domain.dart';
 
 class GetGradesDataUC extends UseCase<void, List<GradesData>> {
   GetGradesDataUC({
@@ -12,5 +13,9 @@ class GetGradesDataUC extends UseCase<void, List<GradesData>> {
 
   @override
   Future<List<GradesData>> getRawFuture({void params}) =>
-      repository.getGradesDataList();
+      repository.getGradesDataList().then((gradesDataList) => gradesDataList
+          .map(
+            (gradesData) => gradesData.toDM(),
+          )
+          .toList());
 }

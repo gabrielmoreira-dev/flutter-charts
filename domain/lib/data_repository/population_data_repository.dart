@@ -1,7 +1,7 @@
-import '../models/population_data.dart';
+import 'package:fluttergraphs/data/model/population_data_cm.dart';
 
 abstract class PopulationDataRepository {
 
-  Future<List<PopulationData>> getPopulationDataList();
+  Future<List<PopulationDataCM>> getPopulationDataList();
 
 }
