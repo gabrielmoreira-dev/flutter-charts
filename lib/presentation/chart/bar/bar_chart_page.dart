@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/bar/bar_chart_bloc.dart';
 import 'package:fluttergraphs/presentation/chart/chart_card.dart';
+import 'package:fluttergraphs/presentation/common/graphs_app_bar.dart';
 import 'package:fluttergraphs/presentation/common/response_view/response_view.dart';
 import 'package:provider/provider.dart';
 
@@ -46,9 +47,10 @@ class BarChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bar Chart'),
+      appBar: GraphsAppBar(
+        title: 'Bar Chart',
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: StreamBuilder(
         stream: bloc.onNewState,
         builder: (context, snapshot) => ResponseView<Loading, Error, Success>(
