@@ -34,7 +34,21 @@ class LineChartPage extends StatelessWidget {
       charts.LineChart(
         data,
         animate: true,
-        animationDuration: Duration(seconds: 3),
+        animationDuration: const Duration(seconds: 3),
+        domainAxis: charts.NumericAxisSpec(
+          renderSpec: charts.SmallTickRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
+          ),
+        ),
+        primaryMeasureAxis: charts.NumericAxisSpec(
+          renderSpec: charts.GridlineRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
+          ),
+        ),
       );
 
   @override

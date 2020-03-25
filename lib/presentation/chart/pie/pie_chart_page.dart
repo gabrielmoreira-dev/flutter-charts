@@ -35,11 +35,16 @@ class PieChartPage extends StatelessWidget {
       charts.PieChart(
         data,
         animate: true,
-        animationDuration: Duration(seconds: 3),
+        animationDuration: const Duration(seconds: 3),
         defaultRenderer: charts.ArcRendererConfig(
-          arcWidth: 60,
+          arcWidth: 50,
           arcRendererDecorators: [
-            charts.ArcLabelDecorator(),
+            charts.ArcLabelDecorator(
+              outsideLabelStyleSpec: charts.TextStyleSpec(
+                color: charts.Color.white,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
       );

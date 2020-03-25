@@ -20,9 +20,10 @@ class GraphsApp extends StatelessWidget {
         ],
         child: MaterialApp(
           theme: ThemeData(
-            backgroundColor: Colors.black26,
-            primaryColorDark: Colors.black87,
-            primaryColorLight: Colors.white,
+            backgroundColor: Colors.black87,
+            primaryColor: Colors.grey,
+            primaryColorDark: Colors.black54,
+            primaryColorLight: Colors.black45,
             accentColor: Colors.blueAccent,
             textTheme: TextTheme(
               title: TextStyle(
@@ -31,8 +32,9 @@ class GraphsApp extends StatelessWidget {
                 color: Colors.white,
               ),
               subtitle: TextStyle(
-                fontSize: 20.0,
+                fontSize: 22.0,
                 fontWeight: FontWeight.bold,
+                color: Colors.white
               ),
             ),
           ),

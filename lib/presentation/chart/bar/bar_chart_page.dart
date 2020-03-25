@@ -36,10 +36,20 @@ class BarChartPage extends StatelessWidget {
       charts.BarChart(
         data,
         animate: true,
-        animationDuration: Duration(seconds: 3),
+        animationDuration: const Duration(seconds: 3),
         domainAxis: charts.OrdinalAxisSpec(
           renderSpec: charts.SmallTickRendererSpec(
             labelRotation: 60,
+            labelStyle: charts.TextStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
+          ),
+        ),
+        primaryMeasureAxis: charts.NumericAxisSpec(
+          renderSpec: charts.GridlineRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
           ),
         ),
       );

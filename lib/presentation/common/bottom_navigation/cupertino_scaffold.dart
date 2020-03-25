@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/common/bottom_navigation/bottom_navigation_tab.dart';
 
@@ -35,6 +36,7 @@ class CupertinoScaffold extends StatelessWidget {
         tabBar: CupertinoTabBar(
           items: tabList.map((tab) => tab.item).toList(),
           onTap: (index) => onItemSelected(index),
+          backgroundColor: Theme.of(context).primaryColorDark,
         ),
         tabBuilder: (context, index) => _buildPageFlow(context, tabList[index]),
       );
