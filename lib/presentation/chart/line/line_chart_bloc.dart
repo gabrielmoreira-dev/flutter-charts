@@ -43,7 +43,7 @@ class LineChartBloc {
           id: 'Sales 2',
           data: dataVM,
           domainFn: (SalesDataVM series, _) => series.year,
-          measureFn: (SalesDataVM series, _) => series.sales * 1.5,
+          measureFn: (SalesDataVM series, _) => series.sales * 1.5 - 4000000,
           colorFn: (SalesDataVM series, _) =>
           charts.MaterialPalette.green.shadeDefault,
         ),

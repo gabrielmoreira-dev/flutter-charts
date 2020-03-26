@@ -67,6 +67,7 @@ class BarChartPage extends StatelessWidget {
           snapshot: snapshot,
           builder: (context, success) => ChartCard(
             chartBuilder: _chartBuilder(success.series),
+            title: "Population",
           ),
         ),
       ),

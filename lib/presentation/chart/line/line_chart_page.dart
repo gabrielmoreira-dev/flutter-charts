@@ -38,10 +38,12 @@ class LineChartPage extends StatelessWidget {
         animationDuration: const Duration(seconds: 3),
         domainAxis: charts.NumericAxisSpec(
           renderSpec: charts.SmallTickRendererSpec(
+            lineStyle: charts.LineStyleSpec(
+              dashPattern: [1, 2],
+            ),
             labelStyle: charts.TextStyleSpec(
               color: charts.MaterialPalette.white,
             ),
-            
           ),
         ),
         primaryMeasureAxis: charts.NumericAxisSpec(
@@ -79,6 +81,7 @@ class LineChartPage extends StatelessWidget {
           snapshot: snapshot,
           builder: (context, success) => ChartCard(
             chartBuilder: _chartBuilder(success.series),
+            title: "Sales",
           ),
         ),
       ),

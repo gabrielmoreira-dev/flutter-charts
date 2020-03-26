@@ -5,9 +5,12 @@ import 'package:flutter/widgets.dart';
 class ChartCard extends StatelessWidget {
   ChartCard({
     @required this.chartBuilder,
-  }) : assert(chartBuilder != null);
+    @required this.title,
+  })  : assert(chartBuilder != null),
+        assert(title != null);
 
   final Widget chartBuilder;
+  final String title;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -28,7 +31,7 @@ class ChartCard extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    "Population",
+                    title,
                     style: Theme.of(context).textTheme.subtitle,
                   ),
                   SizedBox(
