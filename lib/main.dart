@@ -22,7 +22,7 @@ class GraphsApp extends StatelessWidget {
           theme: ThemeData(
             backgroundColor: Colors.black87,
             primaryColor: Colors.grey,
-            primaryColorDark: Colors.black54,
+            primaryColorDark: Colors.black,
             primaryColorLight: Colors.black45,
             accentColor: Colors.blueAccent,
             textTheme: TextTheme(
