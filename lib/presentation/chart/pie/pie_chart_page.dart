@@ -62,6 +62,7 @@ class PieChartPage extends StatelessWidget {
           snapshot: snapshot,
           builder: (context, success) => ChartCard(
             chartBuilder: _chartBuilder(success.series),
+            title: "Grades",
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:domain/use_case/get_sales_data_uc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/chart_card.dart';
 import 'package:fluttergraphs/presentation/chart/line/line_chart_bloc.dart';
@@ -37,17 +38,33 @@ class LineChartPage extends StatelessWidget {
         animationDuration: const Duration(seconds: 3),
         domainAxis: charts.NumericAxisSpec(
           renderSpec: charts.SmallTickRendererSpec(
+            lineStyle: charts.LineStyleSpec(
+              dashPattern: [1, 2],
+            ),
             labelStyle: charts.TextStyleSpec(
               color: charts.MaterialPalette.white,
             ),
           ),
         ),
         primaryMeasureAxis: charts.NumericAxisSpec(
-          renderSpec: charts.GridlineRendererSpec(
-            labelStyle: charts.TextStyleSpec(
-              color: charts.MaterialPalette.white,
+          renderSpec: charts.NoneRenderSpec(),
+        ),
+        behaviors: [
+          charts.SeriesLegend(
+            position: charts.BehaviorPosition.bottom,
+            cellPadding: const EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 5,
+            ),
+            outsideJustification: charts.OutsideJustification.start,
+            desiredMaxColumns: 1,
+            entryTextStyle: charts.TextStyleSpec(
+              color: charts.Color.white,
             ),
           ),
+        ],
+        defaultRenderer: charts.LineRendererConfig(
+          symbolRenderer: charts.CircleSymbolRenderer(),
         ),
       );
 
@@ -64,6 +81,7 @@ class LineChartPage extends StatelessWidget {
           snapshot: snapshot,
           builder: (context, success) => ChartCard(
             chartBuilder: _chartBuilder(success.series),
+            title: "Sales",
           ),
         ),
       ),

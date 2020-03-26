@@ -5,9 +5,12 @@ import 'package:flutter/widgets.dart';
 class ChartCard extends StatelessWidget {
   ChartCard({
     @required this.chartBuilder,
-  }) : assert(chartBuilder != null);
+    @required this.title,
+  })  : assert(chartBuilder != null),
+        assert(title != null);
 
   final Widget chartBuilder;
+  final String title;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -24,11 +27,11 @@ class ChartCard extends StatelessWidget {
             elevation: 5.0,
             color: Theme.of(context).primaryColorLight,
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: Column(
                 children: <Widget>[
                   Text(
-                    "Population",
+                    title,
                     style: Theme.of(context).textTheme.subtitle,
                   ),
                   SizedBox(
