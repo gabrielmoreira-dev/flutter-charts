@@ -8,11 +8,11 @@ extension BarChartMappers on PopulationData {
         year: year,
         population: population,
         barColor: population < 100000000
-            ? charts.ColorUtil.fromDartColor(Colors.lightBlue)
+            ? charts.ColorUtil.fromDartColor(Colors.lightBlueAccent)
             : population < 200000000
                 ? charts.ColorUtil.fromDartColor(Colors.blue)
                 : population < 300000000
-                    ? charts.ColorUtil.fromDartColor(Colors.purple)
-                    : charts.ColorUtil.fromDartColor(Colors.black),
+                    ? charts.ColorUtil.fromDartColor(Colors.deepPurpleAccent)
+                    : charts.ColorUtil.fromDartColor(Colors.deepPurple),
       );
 }

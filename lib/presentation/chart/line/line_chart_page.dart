@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttergraphs/presentation/chart/chart_card.dart';
 import 'package:fluttergraphs/presentation/chart/line/line_chart_bloc.dart';
 import 'package:fluttergraphs/presentation/chart/line/line_chart_models.dart';
+import 'package:fluttergraphs/presentation/common/graphs_app_bar.dart';
 import 'package:fluttergraphs/presentation/common/response_view/response_view.dart';
 import 'package:provider/provider.dart';
 
@@ -33,15 +34,30 @@ class LineChartPage extends StatelessWidget {
       charts.LineChart(
         data,
         animate: true,
-        animationDuration: Duration(seconds: 3),
+        animationDuration: const Duration(seconds: 3),
+        domainAxis: charts.NumericAxisSpec(
+          renderSpec: charts.SmallTickRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
+          ),
+        ),
+        primaryMeasureAxis: charts.NumericAxisSpec(
+          renderSpec: charts.GridlineRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
+          ),
+        ),
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Line Chart'),
+      appBar: GraphsAppBar(
+        title: 'Line Chart',
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: StreamBuilder(
         stream: bloc.onNewState,
         builder: (context, snapshot) => ResponseView<Loading, Error, Success>(

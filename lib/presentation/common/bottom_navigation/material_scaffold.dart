@@ -69,6 +69,9 @@ class _MaterialScaffoldState extends State<MaterialScaffold> {
         currentIndex: widget.selectedIndex,
         items: widget.tabList.map((tab) => tab.item).toList(),
         onTap: (index) => widget.onItemSelected(index),
+        backgroundColor: Theme.of(context).primaryColorDark,
+        selectedItemColor: Theme.of(context).accentColor,
+        unselectedItemColor: Theme.of(context).primaryColor,
       ),
     );
   }

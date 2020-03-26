@@ -19,6 +19,25 @@ class GraphsApp extends StatelessWidget {
           ..._buildUCProviders,
         ],
         child: MaterialApp(
+          theme: ThemeData(
+            backgroundColor: Colors.black87,
+            primaryColor: Colors.grey,
+            primaryColorDark: Colors.black,
+            primaryColorLight: Colors.black45,
+            accentColor: Colors.blueAccent,
+            textTheme: TextTheme(
+              title: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              subtitle: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+            ),
+          ),
           home: HomeScreen(),
         ),
       );
