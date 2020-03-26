@@ -38,7 +38,15 @@ class LineChartBloc {
           measureFn: (SalesDataVM series, _) => series.sales,
           colorFn: (SalesDataVM series, _) =>
               charts.MaterialPalette.blue.shadeDefault,
-        )
+        ),
+        charts.Series(
+          id: 'Sales 2',
+          data: dataVM,
+          domainFn: (SalesDataVM series, _) => series.year,
+          measureFn: (SalesDataVM series, _) => series.sales * 1.5,
+          colorFn: (SalesDataVM series, _) =>
+          charts.MaterialPalette.green.shadeDefault,
+        ),
       ];
       yield Success(
         series: series,

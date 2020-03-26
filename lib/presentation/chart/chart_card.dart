@@ -24,7 +24,7 @@ class ChartCard extends StatelessWidget {
             elevation: 5.0,
             color: Theme.of(context).primaryColorLight,
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: Column(
                 children: <Widget>[
                   Text(
